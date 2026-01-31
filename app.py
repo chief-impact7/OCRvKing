@@ -31,19 +31,26 @@ def main():
         st.header("설정 (Settings)")
         
         # 1. Gemini API Key
-        api_key = st.text_input(
-            "Gemini API Key",
-            type="password",
-            help="Google AI Studio에서 발급받은 API 키를 입력하세요."
-        )
-        
-        if api_key:
-            try:
-                genai.configure(api_key=api_key)
-                st.session_state.api_key_configured = True
-                st.success("API 키가 설정되었습니다.")
-            except Exception as e:
-                st.error(f"API 키 설정 실패: {str(e)}")
+        secret_api_key = st.secrets.get("GEMINI_API_KEY")
+        if secret_api_key:
+            api_key = secret_api_key
+            st.success("인증 정보가 Secrets에서 자동으로 확인되었습니다.")
+            st.session_state.api_key_configured = True
+            genai.configure(api_key=api_key)
+        else:
+            api_key = st.text_input(
+                "Gemini API Key",
+                type="password",
+                help="Google AI Studio에서 발급받은 API 키를 입력하세요."
+            )
+            
+            if api_key:
+                try:
+                    genai.configure(api_key=api_key)
+                    st.session_state.api_key_configured = True
+                    st.success("API 키가 설정되었습니다.")
+                except Exception as e:
+                    st.error(f"API 키 설정 실패: {str(e)}")
         
         st.divider()
         
