@@ -20,150 +20,161 @@ st.markdown("""
 <style>
     /* 기본 배경 및 폰트 설정 */
     .stApp {
-        background-color: #f8f9fa;
+        background-color: #fcfcfd;
         font-family: 'Inter', 'Pretendard', -apple-system, sans-serif;
     }
     
     /* 메인 컨테이너 비율 조정 */
     .main .block-container {
-        padding-top: 2rem;
+        padding-top: 1.5rem;
         max-width: 1100px;
     }
 
-    /* 헤더 디자인: 부드러운 화이트 톤 */
+    /* 헤더 디자인: 어휘왕 브랜드 반영 */
     .header-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem 2.5rem;
+        padding: 1rem 2rem;
         background-color: #ffffff;
-        border-bottom: 1px solid #e9ecef;
+        border-bottom: 1px solid #f1f3f5;
     }
     .header-title {
-        font-size: 1.3rem;
-        font-weight: 700;
+        font-size: 1.4rem;
+        font-weight: 800;
         color: #212529;
-        display: flex;
-        align-items: center;
-        letter-spacing: -0.03em;
-    }
-    .header-logo {
-        width: 28px;
-        height: 28px;
-        background: #5c7cfa;
-        border-radius: 7px;
-        margin-right: 12px;
+        letter-spacing: -0.04em;
     }
 
-    /* 스테퍼 디자인: 저채도 그레이/블루 활용 */
+    /* 스테퍼 디자인: 부드러운 톤 */
     .stepper-container {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 3.5rem 0;
+        margin: 3rem 0;
         gap: 0;
     }
     .step {
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 140px;
+        width: 150px;
     }
     .step-circle {
-        width: 38px;
-        height: 38px;
+        width: 34px;
+        height: 34px;
         border-radius: 50%;
-        background-color: #ffffff;
+        background-color: #f8f9fa;
         color: #adb5bd;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         font-weight: 700;
         margin-bottom: 0.75rem;
-        transition: all 0.4s ease;
+        transition: all 0.3s ease;
         border: 2px solid #e9ecef;
     }
     .step-circle.active {
-        background-color: #5c7cfa;
-        color: #ffffff;
-        border-color: #5c7cfa;
-        box-shadow: 0 4px 10px rgba(92, 124, 250, 0.2);
+        background-color: #ffffff;
+        color: #4c6ef5;
+        border-color: #4c6ef5;
     }
     .step-label {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         color: #adb5bd;
         font-weight: 500;
     }
     .step-label.active {
-        color: #495057;
-        font-weight: 600;
+        color: #212529;
+        font-weight: 700;
     }
     .step-line {
-        height: 1.5px;
+        height: 1px;
         width: 80px;
         background-color: #e9ecef;
         margin-bottom: 2rem;
     }
 
-    /* 상태 박스: 은은한 그림자와 부드러운 배경 */
+    /* 상태 박스 */
     .status-box {
         background-color: #ffffff;
-        padding: 1.5rem;
-        border-radius: 12px;
-        border: 1px solid #e9ecef;
+        padding: 1.25rem;
+        border-radius: 10px;
+        border: 1px solid #f1f3f5;
         text-align: center;
-        margin-bottom: 2.5rem;
-        color: #868e96;
-        font-size: 1rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        margin-bottom: 2rem;
+        color: #495057;
+        font-size: 0.95rem;
     }
 
-    /* 파일 업로드 영역: 크기 확대 및 부드러운 인터랙션 */
+    /* 입력 필드 배경 조정: 옅은 회색 */
+    .stSelectbox div[data-baseweb="select"], 
+    .stTextArea textarea {
+        background-color: #f1f3f5 !important;
+        border: 1px solid #e9ecef !important;
+        border-radius: 8px !important;
+        color: #212529 !important;
+    }
+    
+    /* 파일 업로드 영역: 검정 배경 제거 및 프리미엄 스타일 */
     [data-testid="stFileUploader"] {
-        border: 2px dashed #dee2e6;
-        border-radius: 20px;
-        padding: 40px 20px !important;
-        background-color: #ffffff;
+        background-color: #ffffff !important;
+        border: 1px solid #f1f3f5 !important;
+        border-radius: 12px;
+        padding: 50px 30px !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.02);
         transition: all 0.3s ease;
     }
-    [data-testid="stFileUploader"]:hover {
-        border-color: #748ffc;
-        background-color: #f8f9ff;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.04);
-    }
-    
-    /* 탭 메뉴 정돈 */
-    .stTabs [data-baseweb="tab-list"] {
-        background-color: transparent;
-        border-bottom: 1px solid #e9ecef;
-        margin-bottom: 2rem;
-    }
-    .stTabs [data-baseweb="tab"] {
-        padding: 0.5rem 2rem;
-        color: #adb5bd;
-        font-weight: 500;
-    }
-    .stTabs [aria-selected="true"] {
-        color: #5c7cfa !important;
+    [data-testid="stFileUploader"] section {
         background-color: transparent !important;
     }
+    [data-testid="stFileUploader"]:hover {
+        border-color: #dee2e6 !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+        transform: translateY(-2px);
+    }
     
-    /* 익스팬더/카드 스타일 조정 */
+    /* 버튼 및 텍스트 가독성 통일 */
+    .stButton>button {
+        border-radius: 6px;
+        font-weight: 600;
+    }
+    p, label, span, div {
+        color: #495057; /* 텍스트 색상 통일 */
+    }
+    h1, h2, h3 {
+        color: #212529 !important;
+        font-weight: 700 !important;
+    }
+    
+    /* 탭 메뉴 스타일 */
+    .stTabs [data-baseweb="tab-list"] {
+        border-bottom: 1px solid #f1f3f5;
+    }
+    .stTabs [data-baseweb="tab"] {
+        font-weight: 500;
+        color: #adb5bd;
+    }
+    .stTabs [aria-selected="true"] {
+        color: #212529 !important;
+        font-weight: 700 !important;
+    }
+
+    /* 익스팬더 배경색 조정 */
     .stExpander {
-        border: 1px solid #e9ecef !important;
-        border-radius: 12px !important;
-        background-color: #ffffff !important;
+        background-color: #f8f9fa !important;
+        border: 1px solid #f1f3f5 !important;
+        border-radius: 10px !important;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# 헤더
+# 헤더: 로고 제거 및 명칭 변경
 st.markdown("""
 <div class="header-container">
     <div class="header-title">
-        <div class="header-logo"></div>
-        AutoGrade AI
+        어휘왕 OCR 채점기
     </div>
     <div style="color: #adb5bd; font-size: 0.8rem; font-weight: 500;">
         Powered by Gemini 3.0
