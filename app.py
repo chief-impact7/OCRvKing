@@ -11,7 +11,6 @@ import time
 # 페이지 설정
 st.set_page_config(
     page_title="AI 자동 채점 도우미",
-    page_icon="📝",
     layout="wide"
 )
 
@@ -24,12 +23,12 @@ if "api_key_configured" not in st.session_state:
     st.session_state.api_key_configured = False
 
 def main():
-    st.title("📝 AI 자동 채점 도우미")
+    st.title("AI 자동 채점 도우미")
     st.markdown("선생님의 채점 업무를 Gemini가 도와드립니다.")
 
     # 사이드바 설정
     with st.sidebar:
-        st.header("⚙️ 설정 (Settings)")
+        st.header("설정 (Settings)")
         
         # 1. Gemini API Key
         api_key = st.text_input(
@@ -42,7 +41,7 @@ def main():
             try:
                 genai.configure(api_key=api_key)
                 st.session_state.api_key_configured = True
-                st.success("API 키가 설정되었습니다!")
+                st.success("API 키가 설정되었습니다.")
             except Exception as e:
                 st.error(f"API 키 설정 실패: {str(e)}")
         
@@ -75,15 +74,15 @@ def main():
 
     # 메인 워크플로우
     if not st.session_state.api_key_configured:
-        st.warning("👈 왼쪽 사이드바에서 Gemini API Key를 먼저 설정해주세요.")
+        st.warning("왼쪽 사이드바에서 Gemini API Key를 먼저 설정해주세요.")
         return
 
-    tab1, tab2, tab3 = st.tabs(["1️⃣ 정답지 등록", "2️⃣ 학생 답안 제출", "3️⃣ 채점 및 결과"])
+    tab1, tab2, tab3 = st.tabs(["1단계 정답지 등록", "2단계 학생 답안 제출", "3단계 채점 및 결과"])
 
     # Tab 1: 정답지 등록
     with tab1:
         st.header("정답 및 채점 기준 등록")
-        st.info("채점의 기준이 되는 '정답지' 또는 '모범 답안' 파일을 업로드해주세요.")
+        st.info("채점의 기준이 되는 정답지 또는 모범 답안 파일을 업로드해주세요.")
         
         reference_file = st.file_uploader(
             "정답지 파일 (PDF/이미지)",
@@ -95,7 +94,7 @@ def main():
             # 임시 파일로 저장하여 경로 확보
             ref_path = utils.save_uploaded_file(reference_file)
             st.session_state['ref_file_path'] = ref_path
-            st.success(f"✅ 정답지 파일 로드 완료: {reference_file.name}")
+            st.success(f"정답지 파일 로드 완료: {reference_file.name}")
 
     # Tab 2: 학생 답안 제출
     with tab2:
@@ -116,26 +115,26 @@ def main():
             drive_link = st.text_input("Google Drive 폴더 공유 링크")
             st.markdown("""
             > [!TIP]
-            > 반드시 해당 폴더를 다음 이메일로 **'공유(편집자 권한)'** 해주세요:
-            > `(Service Account Email이 여기에 표시될 예정)`
+            > 반드시 해당 폴더를 다음 이메일 주소로 공유(편집자 권한) 해주세요:
+            > (Service Account Email이 여기에 표시될 예정)
             """)
             if st.button("드라이브에서 파일 가져오기"):
-                st.info("기능 구현 중입니다...")
+                st.info("기능 구현 중입니다.")
 
     # Tab 3: 채점 및 결과
     with tab3:
         st.header("채점 진행 및 결과 저장")
         
-        if st.button("🚀 채점 시작 (Start Grading)", type="primary"):
+        if st.button("채점 시작 (Start Grading)", type="primary"):
             if not st.session_state.get('ref_file_path'):
-                 st.error("먼저 Tab 1에서 정답지를 등록해주세요.")
+                 st.error("먼저 1단계 탭에서 정답지를 등록해주세요.")
                  return
             
             if not student_files and input_method == "직접 파일 업로드":
                  st.error("채점할 학생 답안 파일이 없습니다.")
                  return
 
-            st.write("채점을 시작합니다...")
+            st.write("채점을 시작합니다.")
             progress_bar = st.progress(0)
             status_text = st.empty()
             
