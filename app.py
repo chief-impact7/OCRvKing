@@ -126,7 +126,7 @@ st.markdown("""
     /* 입력 필드 (배경 옅은 회색, 글씨색 통일) */
     .stSelectbox div[data-baseweb="select"], 
     .stTextArea textarea,
-    [data-baseweb="popover"], [data-baseweb="menu"] {
+    [data-baseweb="popover"], [data-baseweb="menu"], [role="listbox"] {
         background-color: #f1f3f5 !important;
         background: #f1f3f5 !important;
         border: 1px solid #e9ecef !important;
@@ -134,13 +134,22 @@ st.markdown("""
         color: #212529 !important;
     }
     
-    /* 셀렉트박스 내부 옵션 리스트가 검정으로 나오는 것 방지 */
-    [data-baseweb="menu"] li {
+    /* 셀렉트박스 내부 옵션 리스트 및 팝오버 전체 색상 강제 오버라이드 */
+    div[data-baseweb="popover"] div, 
+    div[data-baseweb="menu"] div,
+    ul[role="listbox"], li[role="option"] {
         background-color: #f1f3f5 !important;
         color: #212529 !important;
     }
-    [data-baseweb="menu"] li:hover {
+    
+    /* 호버 시 배경색 변경 */
+    li[role="option"]:hover, li[data-active-item="true"] {
         background-color: #e9ecef !important;
+    }
+
+    /* 드롭다운 포커스/선택 상태 검정 배경 제거 */
+    [data-baseweb="select"] > div {
+        background-color: #f1f3f5 !important;
     }
     
     /* 파일 업로드 영역 */
