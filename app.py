@@ -51,12 +51,12 @@ st.markdown("""
         color: #212529 !important;
     }
 
-    /* 스테퍼 디자인 */
+    /* 스테퍼 디자인: 그라데이션 고도화 */
     .stepper-container {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 3rem 0;
+        margin: 3.5rem 0;
         gap: 0;
     }
     .step {
@@ -66,27 +66,28 @@ st.markdown("""
         width: 150px;
     }
     .step-circle {
-        width: 34px;
-        height: 34px;
+        width: 38px;
+        height: 38px;
         border-radius: 50%;
         background-color: #ffffff;
         color: #adb5bd;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         font-weight: 700;
         margin-bottom: 0.75rem;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         border: 2px solid #f1f3f5;
     }
     .step-circle.active {
-        background-color: #ffffff;
-        color: #4c6ef5;
-        border-color: #4c6ef5;
+        background: linear-gradient(135deg, #4c6ef5, #748ffc) !important;
+        color: #ffffff !important;
+        border: none !important;
+        box-shadow: 0 4px 15px rgba(76, 110, 245, 0.3);
     }
     .step-label {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         color: #adb5bd !important;
         font-weight: 500;
     }
@@ -95,7 +96,7 @@ st.markdown("""
         font-weight: 700;
     }
     .step-line {
-        height: 1px;
+        height: 1.5px;
         width: 80px;
         background-color: #f1f3f5;
         margin-bottom: 2rem;
@@ -108,73 +109,84 @@ st.markdown("""
         border-radius: 10px;
         border: 1px solid #f1f3f5;
         text-align: center;
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
         color: #212529;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.02);
     }
 
-    /* 익스팬더 & 위젯 배경 (옅은 회색으로 강제 통일) */
-    .stExpander, [data-testid="stExpander"] {
-        background-color: #f8f9fa !important;
-        border: 1px solid #f1f3f5 !important;
-        border-radius: 10px !important;
-    }
-    .stExpander summary {
-        background-color: #f8f9fa !important;
-        color: #212529 !important;
-    }
-    
-    /* 입력 필드 (배경 옅은 회색, 글씨색 통일) */
-    .stSelectbox div[data-baseweb="select"], 
-    .stTextArea textarea,
-    [data-baseweb="popover"], [data-baseweb="menu"], [role="listbox"] {
+    /* [CRITICAL] 위젯 다크 배경 원천 제거 (매우 강력한 오버라이드) */
+    /* 선택창, 드롭다운, 팝오버 등 모든 레이어 타겟팅 */
+    .stSelectbox, .stSelectbox div, [data-baseweb="select"], [data-baseweb="popover"], 
+    [data-baseweb="menu"], [role="listbox"], [role="option"], .stTextArea textarea {
         background-color: #f1f3f5 !important;
         background: #f1f3f5 !important;
-        border: 1px solid #e9ecef !important;
-        border-radius: 8px !important;
         color: #212529 !important;
-    }
-    
-    /* 셀렉트박스 내부 옵션 리스트 및 팝오버 전체 색상 강제 오버라이드 */
-    div[data-baseweb="popover"] div, 
-    div[data-baseweb="menu"] div,
-    ul[role="listbox"], li[role="option"] {
-        background-color: #f1f3f5 !important;
-        color: #212529 !important;
-    }
-    
-    /* 호버 시 배경색 변경 */
-    li[role="option"]:hover, li[data-active-item="true"] {
-        background-color: #e9ecef !important;
     }
 
-    /* 드롭다운 포커스/선택 상태 검정 배경 제거 */
-    [data-baseweb="select"] > div {
+    /* 특정 하위 요소들까지 모두 옅은 회색으로 강제 */
+    [data-baseweb="select"] > div, 
+    [data-baseweb="popover"] > div,
+    [data-baseweb="menu"] > div,
+    ul[role="listbox"] {
         background-color: #f1f3f5 !important;
+        background: #f1f3f5 !important;
+        border: none !important;
+    }
+
+    /* 리스트 항목 호버 시 효과 */
+    li[role="option"]:hover, li[data-active-item="true"], [data-baseweb="menu"] li:hover {
+        background-color: #e9ecef !important;
+        color: #212529 !important;
+    }
+
+    /* 입력 필드 테두리 스타일 */
+    .stSelectbox div[data-baseweb="select"], .stTextArea textarea {
+        border: 1px solid #e9ecef !important;
+        border-radius: 10px !important;
     }
     
-    /* 파일 업로드 영역 */
+    /* 파일 업로드 영역: 깔끔한 화이트 유지 */
     [data-testid="stFileUploader"] {
         background-color: #ffffff !important;
-        border: 1px solid #f1f3f5 !important;
-        border-radius: 12px;
-        padding: 50px 30px !important;
+        border: 2px dashed #f1f3f5 !important;
+        border-radius: 16px;
+        padding: 60px 40px !important; /* 크기 더 확대 */
         transition: all 0.3s ease;
     }
     [data-testid="stFileUploader"] section {
         background-color: transparent !important;
     }
+    [data-testid="stFileUploader"]:hover {
+        border-color: #748ffc !important;
+        background-color: #fcfdfe !important;
+    }
     
     /* 버튼 스타일 */
     .stButton>button {
-        border-radius: 6px;
-        font-weight: 600;
+        border-radius: 8px;
+        font-weight: 700;
+        padding: 0.6rem 2rem;
+        background-color: #f1f3f5;
         border: 1px solid #e9ecef;
+        color: #212529;
+    }
+    .stButton>button:hover {
+        background-color: #e9ecef;
+        border-color: #dee2e6;
     }
     
-    /* 제목 폰트 굵기 */
+    /* 제목 및 강조 텍스트 */
     h1, h2, h3 {
         color: #212529 !important;
         font-weight: 800 !important;
+        letter-spacing: -0.02em;
+    }
+
+    /* 익스팬더 색상 조정 */
+    .stExpander {
+        background-color: #f8f9fa !important;
+        border: 1px solid #f1f3f5 !important;
+        margin-bottom: 1rem;
     }
 </style>
 """, unsafe_allow_html=True)
