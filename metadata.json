@@ -1,0 +1,5 @@
+{
+  "name": "OCR 어휘왕채점",
+  "description": "An automated exam grading assistant using Gemini 3.0 Flash. Teachers can upload answer keys and student papers to receive instant, structured grading feedback and exportable results.",
+  "requestFramePermissions": []
+}
