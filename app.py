@@ -49,11 +49,19 @@ def main():
         st.divider()
         
         # 2. 모델 선택
-        model_name = st.selectbox(
+        model_options = {
+            "Gemini 3.0 Flash (Recommended)": "gemini-2.0-flash-exp",
+            "Gemini 1.5 Flash": "gemini-1.5-flash",
+            "Gemini 1.5 Pro": "gemini-1.5-pro"
+        }
+        
+        selected_model_label = st.selectbox(
             "채점 모델 선택",
-            ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-2.0-flash-exp"],
-            index=0
+            options=list(model_options.keys()),
+            index=0,
+            help="가장 빠르고 강력한 Gemini 3.0 Flash 모델 사용을 권장합니다."
         )
+        model_name = model_options[selected_model_label]
         
         st.divider()
         
