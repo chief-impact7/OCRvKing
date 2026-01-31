@@ -20,156 +20,140 @@ st.markdown("""
 <style>
     /* 기본 배경 및 폰트 설정 */
     .stApp {
-        background-color: #fcfcfd;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background-color: #f8f9fa;
+        font-family: 'Inter', 'Pretendard', -apple-system, sans-serif;
     }
     
-    /* 메인 컨테이너 패딩 */
+    /* 메인 컨테이너 비율 조정 */
     .main .block-container {
         padding-top: 2rem;
-        max-width: 1000px;
+        max-width: 1100px;
     }
 
-    /* 헤더 디자인 */
+    /* 헤더 디자인: 부드러운 화이트 톤 */
     .header-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1.25rem 2.5rem;
-        background-color: white;
-        border-bottom: 1px solid #f1f3f5;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        padding: 1rem 2.5rem;
+        background-color: #ffffff;
+        border-bottom: 1px solid #e9ecef;
     }
     .header-title {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         font-weight: 700;
-        color: #1a1b1e;
+        color: #212529;
         display: flex;
         align-items: center;
-        letter-spacing: -0.02em;
+        letter-spacing: -0.03em;
     }
     .header-logo {
-        width: 30px;
-        height: 30px;
-        background: linear-gradient(135deg, #4c6ef5, #5c7cfa);
-        border-radius: 6px;
-        margin-right: 14px;
+        width: 28px;
+        height: 28px;
+        background: #5c7cfa;
+        border-radius: 7px;
+        margin-right: 12px;
     }
 
-    /* 스테퍼 디자인 */
+    /* 스테퍼 디자인: 저채도 그레이/블루 활용 */
     .stepper-container {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 3rem 0;
+        margin: 3.5rem 0;
         gap: 0;
     }
     .step {
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 120px;
+        width: 140px;
     }
     .step-circle {
-        width: 36px;
-        height: 36px;
+        width: 38px;
+        height: 38px;
         border-radius: 50%;
-        background-color: #f1f3f5;
+        background-color: #ffffff;
         color: #adb5bd;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 0.9rem;
-        font-weight: 600;
+        font-size: 0.95rem;
+        font-weight: 700;
         margin-bottom: 0.75rem;
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
+        transition: all 0.4s ease;
+        border: 2px solid #e9ecef;
     }
     .step-circle.active {
-        background-color: #f1f3f5;
-        color: #4c6ef5;
-        border-color: #4c6ef5;
+        background-color: #5c7cfa;
+        color: #ffffff;
+        border-color: #5c7cfa;
+        box-shadow: 0 4px 10px rgba(92, 124, 250, 0.2);
     }
     .step-label {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         color: #adb5bd;
         font-weight: 500;
     }
     .step-label.active {
-        color: #1a1b1e;
+        color: #495057;
         font-weight: 600;
     }
     .step-line {
-        height: 2px;
-        flex-grow: 0;
-        width: 60px;
-        background-color: #f1f3f5;
+        height: 1.5px;
+        width: 80px;
+        background-color: #e9ecef;
         margin-bottom: 2rem;
     }
 
-    /* 상태 박스 및 카드 디자인 */
+    /* 상태 박스: 은은한 그림자와 부드러운 배경 */
     .status-box {
         background-color: #ffffff;
-        padding: 1.25rem;
+        padding: 1.5rem;
         border-radius: 12px;
         border: 1px solid #e9ecef;
         text-align: center;
-        margin-bottom: 2rem;
-        color: #495057;
-        font-size: 0.95rem;
-        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        margin-bottom: 2.5rem;
+        color: #868e96;
+        font-size: 1rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.03);
     }
 
-    /* 파일 업로드 영역 커스텀 (호버 효과) */
+    /* 파일 업로드 영역: 크기 확대 및 부드러운 인터랙션 */
     [data-testid="stFileUploader"] {
         border: 2px dashed #dee2e6;
-        border-radius: 16px;
-        padding: 10px;
+        border-radius: 20px;
+        padding: 40px 20px !important;
         background-color: #ffffff;
-        transition: all 0.2s ease;
+        transition: all 0.3s ease;
     }
     [data-testid="stFileUploader"]:hover {
-        border-color: #4c6ef5;
-        background-color: #f8faff;
-        transform: translateY(-2px);
-        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+        border-color: #748ffc;
+        background-color: #f8f9ff;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.04);
     }
     
-    /* 버튼 모던화 */
-    .stButton>button {
-        border-radius: 8px;
-        font-weight: 600;
-        padding: 0.5rem 1.5rem;
-        transition: all 0.2s;
-    }
-    
-    /* 탭 메뉴 디자인 */
+    /* 탭 메뉴 정돈 */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
         background-color: transparent;
+        border-bottom: 1px solid #e9ecef;
+        margin-bottom: 2rem;
     }
     .stTabs [data-baseweb="tab"] {
-        height: 45px;
-        background-color: white;
-        border-radius: 8px 8px 0 0;
-        border: 1px solid #e9ecef;
-        border-bottom: none;
-        padding: 0 24px;
-        color: #868e96;
+        padding: 0.5rem 2rem;
+        color: #adb5bd;
+        font-weight: 500;
     }
     .stTabs [aria-selected="true"] {
-        background-color: white !important;
-        color: #4c6ef5 !important;
-        border-top: 2px solid #4c6ef5 !important;
+        color: #5c7cfa !important;
+        background-color: transparent !important;
     }
-
-    /* 업로드 영역 글자 숨기기 및 제목 스타일 */
-    .upload-title {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: #1a1b1e;
-        margin-bottom: 1rem;
-        text-align: center;
+    
+    /* 익스팬더/카드 스타일 조정 */
+    .stExpander {
+        border: 1px solid #e9ecef !important;
+        border-radius: 12px !important;
+        background-color: #ffffff !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -181,7 +165,7 @@ st.markdown("""
         <div class="header-logo"></div>
         AutoGrade AI
     </div>
-    <div style="color: #adb5bd; font-size: 0.85rem; font-weight: 500;">
+    <div style="color: #adb5bd; font-size: 0.8rem; font-weight: 500;">
         Powered by Gemini 3.0
     </div>
 </div>
