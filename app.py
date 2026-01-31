@@ -30,7 +30,7 @@ st.markdown("""
         max-width: 1100px;
     }
 
-    /* 헤더 디자인: 어휘왕 브랜드 반영 */
+    /* 헤더 디자인 */
     .header-container {
         display: flex;
         justify-content: space-between;
@@ -42,11 +42,16 @@ st.markdown("""
     .header-title {
         font-size: 1.4rem;
         font-weight: 800;
-        color: #212529;
+        color: #212529; /* 메인 텍스트 컬러 */
         letter-spacing: -0.04em;
     }
 
-    /* 스테퍼 디자인: 부드러운 톤 */
+    /* 모든 텍스트 컬러 통일 */
+    p, label, span, div, .stMarkdown, .stText {
+        color: #212529 !important;
+    }
+
+    /* 스테퍼 디자인 */
     .stepper-container {
         display: flex;
         justify-content: center;
@@ -64,7 +69,7 @@ st.markdown("""
         width: 34px;
         height: 34px;
         border-radius: 50%;
-        background-color: #f8f9fa;
+        background-color: #ffffff;
         color: #adb5bd;
         display: flex;
         justify-content: center;
@@ -73,7 +78,7 @@ st.markdown("""
         font-weight: 700;
         margin-bottom: 0.75rem;
         transition: all 0.3s ease;
-        border: 2px solid #e9ecef;
+        border: 2px solid #f1f3f5;
     }
     .step-circle.active {
         background-color: #ffffff;
@@ -82,95 +87,90 @@ st.markdown("""
     }
     .step-label {
         font-size: 0.85rem;
-        color: #adb5bd;
+        color: #adb5bd !important;
         font-weight: 500;
     }
     .step-label.active {
-        color: #212529;
+        color: #212529 !important;
         font-weight: 700;
     }
     .step-line {
         height: 1px;
         width: 80px;
-        background-color: #e9ecef;
+        background-color: #f1f3f5;
         margin-bottom: 2rem;
     }
 
     /* 상태 박스 */
     .status-box {
         background-color: #ffffff;
-        padding: 1.25rem;
+        padding: 1rem;
         border-radius: 10px;
         border: 1px solid #f1f3f5;
         text-align: center;
         margin-bottom: 2rem;
-        color: #495057;
-        font-size: 0.95rem;
+        color: #212529;
     }
 
-    /* 입력 필드 배경 조정: 옅은 회색 */
+    /* 익스팬더 & 위젯 배경 (옅은 회색으로 강제 통일) */
+    .stExpander, [data-testid="stExpander"] {
+        background-color: #f8f9fa !important;
+        border: 1px solid #f1f3f5 !important;
+        border-radius: 10px !important;
+    }
+    .stExpander summary {
+        background-color: #f8f9fa !important;
+        color: #212529 !important;
+    }
+    
+    /* 입력 필드 (배경 옅은 회색, 글씨색 통일) */
     .stSelectbox div[data-baseweb="select"], 
-    .stTextArea textarea {
+    .stTextArea textarea,
+    [data-baseweb="popover"], [data-baseweb="menu"] {
         background-color: #f1f3f5 !important;
+        background: #f1f3f5 !important;
         border: 1px solid #e9ecef !important;
         border-radius: 8px !important;
         color: #212529 !important;
     }
     
-    /* 파일 업로드 영역: 검정 배경 제거 및 프리미엄 스타일 */
+    /* 셀렉트박스 내부 옵션 리스트가 검정으로 나오는 것 방지 */
+    [data-baseweb="menu"] li {
+        background-color: #f1f3f5 !important;
+        color: #212529 !important;
+    }
+    [data-baseweb="menu"] li:hover {
+        background-color: #e9ecef !important;
+    }
+    
+    /* 파일 업로드 영역 */
     [data-testid="stFileUploader"] {
         background-color: #ffffff !important;
         border: 1px solid #f1f3f5 !important;
         border-radius: 12px;
         padding: 50px 30px !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.02);
         transition: all 0.3s ease;
     }
     [data-testid="stFileUploader"] section {
         background-color: transparent !important;
     }
-    [data-testid="stFileUploader"]:hover {
-        border-color: #dee2e6 !important;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.04);
-        transform: translateY(-2px);
-    }
     
-    /* 버튼 및 텍스트 가독성 통일 */
+    /* 버튼 스타일 */
     .stButton>button {
         border-radius: 6px;
         font-weight: 600;
-    }
-    p, label, span, div {
-        color: #495057; /* 텍스트 색상 통일 */
-    }
-    h1, h2, h3 {
-        color: #212529 !important;
-        font-weight: 700 !important;
+        border: 1px solid #e9ecef;
     }
     
-    /* 탭 메뉴 스타일 */
-    .stTabs [data-baseweb="tab-list"] {
-        border-bottom: 1px solid #f1f3f5;
-    }
-    .stTabs [data-baseweb="tab"] {
-        font-weight: 500;
-        color: #adb5bd;
-    }
-    .stTabs [aria-selected="true"] {
+    /* 제목 폰트 굵기 */
+    h1, h2, h3 {
         color: #212529 !important;
-        font-weight: 700 !important;
-    }
-
-    /* 익스팬더 배경색 조정 */
-    .stExpander {
-        background-color: #f8f9fa !important;
-        border: 1px solid #f1f3f5 !important;
-        border-radius: 10px !important;
+        font-weight: 800 !important;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# 헤더: 로고 제거 및 명칭 변경
+# 헤더
 st.markdown("""
 <div class="header-container">
     <div class="header-title">
