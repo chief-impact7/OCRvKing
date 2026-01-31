@@ -43,12 +43,14 @@ class GraderAI:
         except Exception as e:
             raise RuntimeError(f"Failed to upload file to Gemini: {e}")
 
-    def grade_submission(self, reference_file, student_file) -> Dict[str, Any]:
+    def grade_submission(self, reference_file, student_file, ocr_rules: str = "") -> Dict[str, Any]:
         """
         정답지(reference_file)와 학생 답안(student_file)을 비교 채점합니다.
-        두 파일 모두 Gemini File API 객체여야 합니다.
+        ocr_rules가 제공되면 이를 채점 기준에 반영합니다.
         """
         prompt = "이 학생의 답안을 정답지와 비교하여 채점해주세요."
+        if ocr_rules:
+            prompt += f"\n\n[추가 OCR 및 채점 규칙]\n{ocr_rules}"
         
         try:
             response = self.model.generate_content(
